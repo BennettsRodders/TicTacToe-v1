@@ -17,21 +17,28 @@ public class TicTacToe
 
     public void PlayMove(int xCoOrd, int yCoOrd)
     {
-        if (moveRecord.Any(m => m.X == xCoOrd && m.Y == yCoOrd))
+        if (xCoOrd >= 3)
         {
-            _uiImplementation.Update("Invalid Turn - space already used");
+            _uiImplementation.Update("Invalid Turn - outside of board");
         }
         else
         {
-            moveRecord.Add(new Move { X = xCoOrd, Y = yCoOrd });
-            if (moveRecord.Count == 5)
+            if (moveRecord.Any(m => m.X == xCoOrd && m.Y == yCoOrd))
             {
-                IsOver = true;
-                _uiImplementation.Update("Game Over");
+                _uiImplementation.Update("Invalid Turn - space already used");
             }
             else
             {
-                _uiImplementation.Update("Ready for next player");
+                moveRecord.Add(new Move { X = xCoOrd, Y = yCoOrd });
+                if (moveRecord.Count == 5)
+                {
+                    IsOver = true;
+                    _uiImplementation.Update("Game Over");
+                }
+                else
+                {
+                    _uiImplementation.Update("Ready for next player");
+                }
             }
         }
     }

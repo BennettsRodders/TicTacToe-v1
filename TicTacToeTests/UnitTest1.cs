@@ -57,5 +57,22 @@ namespace TicTacToeTests
             Assert.False(game.IsOver);
             Assert.Equal("Invalid Turn - space already used", uiImplementation.Output.Last());
         }
+
+        [Fact]
+        public void MovesMustBeValid()
+        {
+            // Arrange
+            DummyUI uiImplementation = new DummyUI();
+            var game = new TicTacToe(uiImplementation);
+
+
+            // Act
+            game.PlayMove(3, 0);
+
+
+            // Assert
+            Assert.False(game.IsOver);
+            Assert.Equal("Invalid Turn - outside of board", uiImplementation.Output.Last());
+        }
     }
 }
